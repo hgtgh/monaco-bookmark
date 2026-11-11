@@ -1,29 +1,84 @@
+/* Replaces the codicon font of Monaco 0.36 with the latest codicons */
+@font-face {
+  font-family: codicon-latest;
+  font-display: block;
+  src: url("https://cdn.jsdelivr.net/npm/@vscode/codicons@0.0.46-24/dist/codicon.ttf") format("truetype");
+}
+
+/* Uses the new font for all icons. A new name rather than `codicon`, otherwise Firefox downloads both fonts. */
+.codicon[class*="codicon-"] {
+  font-family: codicon-latest;
+}
+
+/* Editor background (vs-dark).
+   Monaco rounds its height down, so the body can show below it at some zoom levels.
+   Also avoids a white flash while Monaco loads. */
 body {
   margin: 0;
+  background: #1e1e1e;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
-.menu {
-  box-sizing: border-box;
-  width: 100%;
-  height: auto;
-  padding: 0 5px;
+.workspace {
+  flex: 1;
+  min-height: 0;
+  display: flex;
 }
 
-select {
+.editor,
+.preview-frame {
+  flex: 1;
+  min-width: 0;
+}
+
+.preview-frame {
+  border: none;
+}
+
+/* Editor text and border colors (vs-dark), set in CSS so the toolbar is readable before Monaco loads */
+.toolbar {
+  color: #d4d4d4;
+  border-bottom: 1px solid #282828;
+  padding: 0 5px;
+  /* Even line height: keeps the 16px icons on whole pixels (sharper) */
+  font: 13px/20px system-ui, sans-serif;
+  display: flex;
+  gap: 4px;
+}
+
+/* Pushes the other buttons to the right. Unlike `flex: 1`, the clickable area stays the size of the text. */
+.language-picker {
+  margin-right: auto;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   appearance: none;
   background-color: transparent;
   border: none;
-  padding: 0 1em 0 0;
+  padding: 0 6px;
   margin: 0;
-  width: 100%;
   color: inherit;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-
-  z-index: 1;
-
+  font: inherit;
+  cursor: pointer;
   outline: none;
+}
+
+/* Icon width reserved before Monaco loads, so the buttons do not resize when icons appear */
+button .codicon {
+  width: 16px;
+}
+
+/* Needed because `display: inline-flex` above overrides the `hidden` attribute */
+button[hidden] {
+  display: none;
+}
+
+button[aria-pressed="true"] {
+  background-color: rgba(128, 128, 128, 0.3);
 }

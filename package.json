@@ -1,22 +1,24 @@
 {
   "name": "monaco-bookmark",
   "version": "1.0.0",
-  "description": "Monaco editor in bookmark",
+  "description": "Monaco Editor (VS Code's editor) in a bookmark. A lightweight editor in your browser.",
   "author": "hgtgh",
   "license": "MIT",
+  "type": "module",
   "keywords": [
     "monaco-editor",
-    "bookmark"
+    "vscode",
+    "bookmark",
+    "bookmarklet"
   ],
-  "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test"
   },
   "devDependencies": {
-    "vite": "^4.0.0",
-    "vite-plugin-html": "^3.2.0",
-    "vite-plugin-singlefile": "^0.13.2"
+    "vite": "^8.3.8",
+    "vite-plugin-singlefile": "^2.3.4"
   }
 }

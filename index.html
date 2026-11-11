@@ -5,14 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monaco Editor</title>
-    <script src="https://unpkg.com/monaco-editor@0.34.1/min/vs/loader.js"></script>
+    <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.36.1/min/vs/editor/editor.main.js">
+    <link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.36.1/min/vs/editor/editor.main.nls.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.36.1/min/vs/editor/editor.main.css">
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.36.1/min/vs/loader.js"></script>
 </head>
 
 <body>
-    <div class="menu">
-        <select class="language-picker"></select>
+    <div class="toolbar">
+        <button class="language-picker" title="Change language"></button>
+        <button class="wrap-toggle" aria-pressed="false"><span aria-hidden="true" class="codicon codicon-word-wrap"></span>Wrap</button>
+        <button class="preview-toggle" aria-pressed="false" hidden><span aria-hidden="true" class="codicon codicon-open-preview"></span>Preview</button>
+        <button class="diff-toggle" aria-pressed="false"><span aria-hidden="true" class="codicon codicon-diff"></span>Diff</button>
     </div>
-    <div id="editor" style="width: 100%; height: 100%; position: absolute; overflow: hidden;"></div>
+    <div class="workspace">
+        <div class="editor"></div>
+        <iframe class="preview-frame" title="Markdown preview" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe>
+    </div>
     <script type="module" src="/main.js"></script>
 </body>
 
